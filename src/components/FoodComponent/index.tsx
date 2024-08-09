@@ -52,7 +52,7 @@ const FoodComponent = ({
           </RatingContainer>
         </TitleContent>
         <p>{getDescription(description)}</p>
-        <ButtonLink>Saiba Mais</ButtonLink>
+        <ButtonLink to={`/products/$`}>Saiba Mais</ButtonLink>
       </InfoContainer>
     </FoodContainer>
   )
