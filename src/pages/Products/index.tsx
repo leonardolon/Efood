@@ -7,7 +7,6 @@ import HeaderPageProduct from '../../components/HeaderPageProduct'
 import FoodCartComponent from '../../components/FoodCartComponent'
 
 import { useGetRestaurantsIdQuery } from '../../services/api'
-import Checkout from '../Checkout'
 
 const Products = () => {
   const { id } = useParams()
@@ -35,7 +34,6 @@ const Products = () => {
       />
       <FoodCartComponent items={menu.cardapio} />
       <Footer />
-      <Checkout />
     </>
   )
 }
