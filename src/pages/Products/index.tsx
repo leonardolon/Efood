@@ -5,9 +5,9 @@ import Footer from '../../components/Footer'
 import HeaderPageProduct from '../../components/HeaderPageProduct'
 
 import FoodCartComponent from '../../components/FoodCartComponent'
-import Checkout from '../Checkout'
 
 import { useGetRestaurantsIdQuery } from '../../services/api'
+import Checkout from '../Checkout'
 
 const Products = () => {
   const { id } = useParams()
