@@ -1,45 +1,47 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Produto } from '../../models/Produto'
 
-type CartState = {
-  items: CardapioItem[]
+export type CartState = {
+  itens: Produto[]
   isOpen: boolean
+  cartPage: 'cart' | 'entrega' | 'pagamento' | 'realizado'
 }
 
 const initialState: CartState = {
-  items: [],
-  isOpen: false
+  itens: [],
+  isOpen: false,
+  cartPage: 'cart'
 }
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    add: (state, action: PayloadAction<CardapioItem>) => {
-      const itemInCart = state.items.find(
-        (item) => item.id === action.payload.id
-      )
-
-      if (!itemInCart) {
-        state.items.push(action.payload)
-      } else {
-        alert('Este item já está em seu carrinho')
-      }
-    },
-    remove: (state, action: PayloadAction<number>) => {
-      state.items = state.items.filter((item) => item.id !== action.payload)
-    },
     open: (state) => {
       state.isOpen = true
     },
     close: (state) => {
       state.isOpen = false
     },
-    clearCart: (state) => {
-      state.items = []
+    changePage: (state, action: PayloadAction<CartState['cartPage']>) => {
+      state.cartPage = action.payload
+    },
+    add: (state, action: PayloadAction<Produto>) => {
+      const ProdutoProcurado = state.itens.find(
+        (item) => item.id === action.payload.id
+      )
+      if (ProdutoProcurado) {
+        alert('Produto já adicionado')
+      } else {
+        state.itens.push(action.payload)
+        state.isOpen = true
+      }
+    },
+    remove: (state, action: PayloadAction<number>) => {
+      state.itens = state.itens.filter((item) => item.id !== action.payload)
     }
   }
 })
 
-export const { add, remove, close, open, clearCart } = cartSlice.actions
-
+export const { add, remove, open, close, changePage } = cartSlice.actions
 export default cartSlice.reducer

@@ -1,24 +1,21 @@
-import HeaderComponent from '../../components/HeaderComponent'
-
-import FoodList from '../../components/FoodList'
-import Footer from '../../components/Footer'
-
-import { useGetRestaurantsQuery } from '../../services/api'
+import { Container } from '../../styles'
+import Hero from '../../containers/Hero'
+import ListaRestaurantes from '../../containers/ListaRestaurantes'
+import { useGetRestaurantesQuery } from '../../services/api'
 
 const Home = () => {
-  const { data: FoodItems } = useGetRestaurantsQuery()
+  const { data: listaRestaurantesData } = useGetRestaurantesQuery()
 
-  if (FoodItems) {
-    return (
-      <>
-        <HeaderComponent />
-        <FoodList foodArray={FoodItems} />
-        <Footer />
-      </>
-    )
-  }
-
-  return <h4>carregando...</h4>
+  return (
+    <>
+      <Hero />
+      <Container>
+        {listaRestaurantesData && (
+          <ListaRestaurantes restaurantes={listaRestaurantesData} />
+        )}
+      </Container>
+    </>
+  )
 }
 
 export default Home
